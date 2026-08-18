@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Privacy Policy — YT Dual Subtitle Translator</title>
+  <style>
+    :root { color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    body { max-width: 860px; margin: 0 auto; padding: 32px 20px 56px; line-height: 1.65; color: CanvasText; background: Canvas; }
+    h1, h2, h3 { line-height: 1.25; }
+    h1 { margin-bottom: .25rem; }
+    h2 { margin-top: 2rem; border-bottom: 1px solid color-mix(in srgb, CanvasText 20%, transparent); padding-bottom: .35rem; }
+    h3 { margin-top: 1.35rem; }
+    .meta, .notice { color: color-mix(in srgb, CanvasText 72%, transparent); }
+    .notice { border-left: 4px solid #d97706; padding: .75rem 1rem; background: color-mix(in srgb, #d97706 12%, Canvas); }
+    code { overflow-wrap: anywhere; }
+    a { color: #2563eb; }
+  </style>
+</head>
+<body>
+  <main>
+    <h1>Privacy Policy — YT Dual Subtitle Translator</h1>
+    <p class="meta"><strong>Effective date:</strong> August 15, 2026<br><strong>Last updated:</strong> August 15, 2026</p>
+    <p class="notice"><strong>NOT SUBMITTABLE:</strong> Replace the required public URL and privacy-contact placeholders below with verified publisher material before store submission.</p>
+
+    <p>YT Dual Subtitle Translator (the <strong>“Extension”</strong>) adds machine-translated subtitles to YouTube videos. This policy explains what data the Extension handles, why it handles it, where it goes, how long it remains, and what choices you have.</p>
+    <p><strong>Publication placeholders:</strong> Before publishing the Extension, replace <code>[PRIVACY_POLICY_PUBLIC_URL — REQUIRED BEFORE STORE SUBMISSION]</code> and <code>[PRIVACY_CONTACT_EMAIL — REQUIRED BEFORE STORE SUBMISSION]</code>. No public policy URL or contact address is asserted by this repository.</p>
+
+    <h2>1. Data the Extension handles</h2>
+    <p>The Extension handles only the data needed to provide and configure subtitle translation:</p>
+    <ul>
+      <li><strong>YouTube subtitle data:</strong> subtitle text selected for translation and related transient subtitle/track information needed to align it with the current video.</li>
+      <li><strong>Translation choice:</strong> the target language selected by the user.</li>
+      <li><strong>Extension settings:</strong> whether translation is enabled; interface and target languages; translation engine selection; original/translated display mode; subtitle sizes, line width, opacity, background enablement/color/opacity; and timing offset.</li>
+      <li><strong>Consent/enablement record:</strong> a local record containing the current consent version and the time an enable action saved the record.</li>
+      <li><strong>Translation output:</strong> translated subtitle text returned by Google Translate and held temporarily for display and caching.</li>
+    </ul>
+    <p>The Extension does <strong>not</strong> ask for or store a Google Translate API key. It does not intentionally collect names, email addresses, account credentials, payment information, browsing history across sites, or the content of non-YouTube pages.</p>
+
+    <h2>2. How and why data is used</h2>
+    <p>Data is used only for the Extension’s single purpose: to display translated subtitles alongside, or instead of, YouTube captions and to remember the user’s subtitle preferences.</p>
+    <ul>
+      <li>Subtitle text and target language are used to request machine translation.</li>
+      <li>YouTube caption metadata and responses are used in the browser to select, parse, time, and render the current subtitle track.</li>
+      <li>Settings control translation and subtitle presentation.</li>
+      <li>The consent/enablement record is used as a technical gate: the Background Service Worker rejects translation unless a valid current-version record exists and translation remains enabled.</li>
+      <li>Translated text is cached briefly in memory to avoid duplicate translation requests.</li>
+    </ul>
+    <p>The developer does not sell or rent user data. The Extension has no advertising, behavioral profiling, analytics, telemetry, or developer-operated model-training pipeline. Data handled by the Extension is not used by the developer for advertising, analytics, creditworthiness or lending decisions, or training developer models.</p>
+
+    <h2>3. Consent, defaults, and controls</h2>
+    <p>Translation is <strong>off by default</strong>. The Extension does not begin translation merely because it is installed.</p>
+    <p>When no valid current-version local record exists, the Popup, Options page, and YouTube-player settings panel show a disclosure that subtitle text and the selected target language will be sent to Google Translate. Only <strong>Enable translation</strong> in that disclosure saves the record and enables translation. The ordinary <strong>Enable translated subtitles</strong> switch does not grant consent; it can enable translation only after a valid consent record already exists. Selecting <strong>Later</strong> saves <code>enabled: false</code> and does not create the record. Turning YouTube CC on is not consent and cannot create the record or enable translation.</p>
+    <p>The Extension synchronizes trusted user changes to YouTube’s CC button with its translation-enabled setting only after consent already exists. If no consent exists, a trusted CC-on event is blocked: it does not save consent, enable the synced setting, or fetch or translate subtitles; the player shows the disclosure action instead. Turning CC or translation off stops translation but never clears the local consent record.</p>
+    <p>The Background Service Worker sends translation requests only when both:</p>
+    <ol><li>a valid current-version local consent/enablement record exists; and</li><li>the translation setting remains enabled.</li></ol>
+    <p>Turning translation off stops new translation requests. Resetting settings restores default subtitle settings, including the default-off state, but currently does not delete the prior local record. Uninstalling the Extension stops its processing; Chrome normally removes extension-owned local and synced data according to Chrome’s uninstall and sync behavior.</p>
+
+    <h2>4. Data sharing and third-party boundary</h2>
+    <p>When translation is enabled and the valid current-version local record exists, the Extension sends the subtitle text being translated and the selected target language directly from the browser to the Google Translate GTX endpoint at <code>https://translate.googleapis.com/translate_a/single</code> over HTTPS. The request currently uses HTTP GET, so the text and language are encoded in the HTTPS URL query. HTTPS encrypts the request in transit, including the query, between the browser and the service endpoint; endpoint operators and software with access to request URLs may still process or log it.</p>
+    <p>There is <strong>no developer-operated relay server</strong>: subtitle text and translations are not routed through a server controlled by the Extension developer. Google is the third-party recipient and processes translation requests under Google’s own terms and privacy practices. The developer does not control Google’s retention, logging, security, or secondary use after data crosses this boundary. Users should review Google’s applicable policies before enabling translation.</p>
+    <p>YouTube remains a separate third party. The Extension runs only on <code>https://www.youtube.com/*</code>, reads caption data made available to the current YouTube page/player, and may directly request valid YouTube timed-text resources over HTTPS. YouTube’s handling of video, account, and caption data is governed by YouTube/Google policies, not this policy.</p>
+
+    <h2>5. Storage, cache size, and retention</h2>
+    <h3>Synced settings</h3>
+    <p>Extension settings are saved in <code>chrome.storage.sync</code>. Chrome may synchronize these settings through the user’s signed-in Chrome profile according to the user’s Chrome sync configuration and Google’s applicable policies. Subtitle text and translated text are not written to <code>chrome.storage.sync</code> by the translation cache.</p>
+    <h3>Local consent/enablement record</h3>
+    <p>The consent/enablement version and enablement timestamp are saved in <code>chrome.storage.local</code>, local to the Chrome profile rather than intentionally synchronized by the Extension. A separate settings-schema version marker is also stored locally. These local records remain until extension-owned data is removed, such as through uninstall or browser/profile storage management. Resetting subtitle settings removes and recreates the settings-version marker but currently does not remove the consent/enablement record.</p>
+    <h3>In-memory translation cache</h3>
+    <p>The Background Service Worker maintains an in-memory least-recently-used translation cache containing the source text as part of the cache key and the translated text as its value. Its verified defaults are:</p>
+    <ul><li><strong>maximum size:</strong> 1,000 entries;</li><li><strong>time to live:</strong> 30 minutes per entry from insertion; and</li><li><strong>eviction:</strong> expired entries are removed when accessed, and least-recently-used entries are removed when capacity is exceeded.</li></ul>
+    <p>The cache is not persisted to Chrome storage. It disappears when the service worker’s memory is discarded, the Extension is reloaded, or the Extension is uninstalled; Chrome may discard that memory before the 30-minute TTL.</p>
+    <h3>Other transient processing</h3>
+    <p>Current YouTube caption payloads and translation work may exist temporarily in page, content-script, or service-worker memory while a video is processed. The Extension does not provide a developer database or cloud account in which this data is retained.</p>
+
+    <h2>6. Permissions and security</h2>
+    <p>The Extension requests only:</p>
+    <ul>
+      <li><code>storage</code> to save settings, the local consent/enablement record, and the settings-schema version marker;</li>
+      <li>host access to <code>https://www.youtube.com/*</code> to identify the current YouTube watch page and caption track, access valid YouTube timed-text responses, synchronize captions with playback, render translated subtitles, and add the extension’s settings entry to the YouTube player. The content script is matched on the YouTube host, but subtitle processing starts only for a watch page with a video ID; the Extension does not request broad access to other websites; and</li>
+      <li>host access to <code>https://translate.googleapis.com/*</code> to send gated translation requests directly to Google Translate.</li>
+    </ul>
+    <p>Network endpoints are HTTPS. Stored settings and local consent/enablement records are restricted to trusted extension contexts when Chrome supports the relevant access-level API. The Extension uses packaged JavaScript and does not intentionally download or execute remote code. No method of transmission or storage is guaranteed to be completely secure, however.</p>
+
+    <h2>7. Disclosure, transfer, and sale</h2>
+    <p>The developer does not sell user data and does not disclose it to advertisers, data brokers, analytics providers, or developer-operated training systems. Data is transferred to Google Translate only to provide the user-requested translation, as described above. The developer does not use handled data for creditworthiness or lending decisions. Data may also be disclosed if required by applicable law; because the Extension has no developer relay or backend collection, the developer ordinarily does not possess subtitle requests sent directly to Google.</p>
+
+    <h2>8. Children and sensitive content</h2>
+    <p>The Extension is a general-purpose subtitle utility and is not directed specifically to children. Subtitle text can reflect whatever a user chooses to watch and may contain personal or sensitive information. Users should not enable translation for content they do not want sent to Google Translate. If applicable law requires parental consent for a user, that consent should be obtained before using the translation feature.</p>
+
+    <h2>9. International processing</h2>
+    <p>Google may process translation requests in countries other than the user’s country. Chrome sync may likewise process synchronized settings through Google infrastructure. Those transfers are governed by Google’s applicable terms, privacy policies, and legal mechanisms. The Extension developer does not choose Google’s processing locations.</p>
+
+    <h2>10. Your choices and requests</h2>
+    <p>Users can:</p>
+    <ul><li>leave translation off or select <strong>Later</strong> at the disclosure;</li><li>turn translation off at any time to stop new translation requests;</li><li>change the target language or other saved settings;</li><li>use <strong>Reset all settings</strong> to restore subtitle settings to defaults (this does not currently remove the saved local consent/enablement record); or</li><li>uninstall the Extension to stop processing; Chrome normally removes extension-owned local and synced data according to Chrome’s uninstall and sync behavior.</li></ul>
+    <p>Because the developer does not operate an account system, relay server, analytics service, or user database for this Extension, the developer generally cannot identify or retrieve an individual user’s subtitle requests. Privacy questions or legally applicable requests may be sent to <code>[PRIVACY_CONTACT_EMAIL — REQUIRED BEFORE STORE SUBMISSION]</code>.</p>
+
+    <h2>11. Changes to this policy</h2>
+    <p>This policy may change when the Extension’s features, providers, data practices, or legal obligations change. Material changes should be reflected by updating the “Last updated” date, publishing the revised policy, and updating in-product/store disclosures where required. A future consent-version change and re-consent mechanism is tracked in <code>TODO.md</code>; the current implementation recognizes consent version 1.</p>
+
+    <h2>12. Contact</h2>
+    <p>Privacy contact: <code>[PRIVACY_CONTACT_EMAIL — REQUIRED BEFORE STORE SUBMISSION]</code><br>
+    Support contact: <code>[SUPPORT_CONTACT_OR_URL — REQUIRED BEFORE STORE SUBMISSION]</code><br>
+    Public privacy-policy URL: <code>[PRIVACY_POLICY_PUBLIC_URL — REQUIRED BEFORE STORE SUBMISSION]</code></p>
+  </main>
+</body>
+</html>
