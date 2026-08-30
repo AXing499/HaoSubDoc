@@ -11,8 +11,7 @@
     h1 { margin-bottom: .25rem; }
     h2 { margin-top: 2rem; border-bottom: 1px solid color-mix(in srgb, CanvasText 20%, transparent); padding-bottom: .35rem; }
     h3 { margin-top: 1.35rem; }
-    .meta, .notice { color: color-mix(in srgb, CanvasText 72%, transparent); }
-    .notice { border-left: 4px solid #d97706; padding: .75rem 1rem; background: color-mix(in srgb, #d97706 12%, Canvas); }
+    .meta { color: color-mix(in srgb, CanvasText 72%, transparent); }
     code { overflow-wrap: anywhere; }
     a { color: #2563eb; }
   </style>
@@ -20,11 +19,10 @@
 <body>
   <main>
     <h1>Privacy Policy — YT Dual Subtitle Translator</h1>
-    <p class="meta"><strong>Effective date:</strong> August 15, 2026<br><strong>Last updated:</strong> August 15, 2026</p>
-    <p class="notice"><strong>NOT SUBMITTABLE:</strong> Replace the required public URL and privacy-contact placeholders below with verified publisher material before store submission.</p>
+    <p class="meta"><strong>Effective date:</strong> August 15, 2026<br><strong>Last updated:</strong> August 19, 2026</p>
 
     <p>YT Dual Subtitle Translator (the <strong>“Extension”</strong>) adds machine-translated subtitles to YouTube videos. This policy explains what data the Extension handles, why it handles it, where it goes, how long it remains, and what choices you have.</p>
-    <p><strong>Publication placeholders:</strong> Before publishing the Extension, replace <code>[PRIVACY_POLICY_PUBLIC_URL — REQUIRED BEFORE STORE SUBMISSION]</code> and <code>[PRIVACY_CONTACT_EMAIL — REQUIRED BEFORE STORE SUBMISSION]</code>. No public policy URL or contact address is asserted by this repository.</p>
+    <p>The public version of this policy is available at <a href="https://axing499.github.io/HaoSubDoc/">https://axing499.github.io/HaoSubDoc/</a>.</p>
 
     <h2>1. Data the Extension handles</h2>
     <p>The Extension handles only the data needed to provide and configure subtitle translation:</p>
@@ -50,8 +48,8 @@
 
     <h2>3. Consent, defaults, and controls</h2>
     <p>Translation is <strong>off by default</strong>. The Extension does not begin translation merely because it is installed.</p>
-    <p>When no valid current-version local record exists, the Popup, Options page, and YouTube-player settings panel show a disclosure that subtitle text and the selected target language will be sent to Google Translate. Only <strong>Enable translation</strong> in that disclosure saves the record and enables translation. The ordinary <strong>Enable translated subtitles</strong> switch does not grant consent; it can enable translation only after a valid consent record already exists. Selecting <strong>Later</strong> saves <code>enabled: false</code> and does not create the record. Turning YouTube CC on is not consent and cannot create the record or enable translation.</p>
-    <p>The Extension synchronizes trusted user changes to YouTube’s CC button with its translation-enabled setting only after consent already exists. If no consent exists, a trusted CC-on event is blocked: it does not save consent, enable the synced setting, or fetch or translate subtitles; the player shows the disclosure action instead. Turning CC or translation off stops translation but never clears the local consent record.</p>
+    <p>When no valid current-version local record exists, the Popup, Options page, and YouTube-player settings panel show a disclosure that subtitle text and the selected target language will be sent to Google Translate. Only <strong>Enable translation</strong> in that disclosure saves the record and enables translation. The ordinary <strong>Enable extension</strong> switch does not grant consent; it can enable translation only after a valid consent record already exists. Selecting <strong>Later</strong> saves <code>enabled: false</code> and does not create the record. Turning YouTube CC on is not consent and cannot create the record or enable translation. Original-only display does not send subtitle text to Google Translate.</p>
+    <p>YouTube’s CC button controls caption activity for the current player session without changing the Extension’s saved translation preference. Turning CC off pauses Extension translation while preserving that preference. Turning CC on resumes Extension translation only when the saved preference is enabled and valid consent already exists; otherwise, only YouTube’s native captions are shown. CC actions never create consent or enable the saved translation preference. Turning CC or translation off never clears the local consent record.</p>
     <p>The Background Service Worker sends translation requests only when both:</p>
     <ol><li>a valid current-version local consent/enablement record exists; and</li><li>the translation setting remains enabled.</li></ol>
     <p>Turning translation off stops new translation requests. Resetting settings restores default subtitle settings, including the default-off state, but currently does not delete the prior local record. Uninstalling the Extension stops its processing; Chrome normally removes extension-owned local and synced data according to Chrome’s uninstall and sync behavior.</p>
@@ -93,16 +91,15 @@
 
     <h2>10. Your choices and requests</h2>
     <p>Users can:</p>
-    <ul><li>leave translation off or select <strong>Later</strong> at the disclosure;</li><li>turn translation off at any time to stop new translation requests;</li><li>change the target language or other saved settings;</li><li>use <strong>Reset all settings</strong> to restore subtitle settings to defaults (this does not currently remove the saved local consent/enablement record); or</li><li>uninstall the Extension to stop processing; Chrome normally removes extension-owned local and synced data according to Chrome’s uninstall and sync behavior.</li></ul>
-    <p>Because the developer does not operate an account system, relay server, analytics service, or user database for this Extension, the developer generally cannot identify or retrieve an individual user’s subtitle requests. Privacy questions or legally applicable requests may be sent to <code>[PRIVACY_CONTACT_EMAIL — REQUIRED BEFORE STORE SUBMISSION]</code>.</p>
+    <ul><li>leave translation off or select <strong>Later</strong> at the disclosure;</li><li>turn translation off at any time to stop new translation requests; YouTube CC toggles only pause or resume caption activity and do not change the saved translation preference;</li><li>change the target language or other saved settings;</li><li>use <strong>Reset all settings</strong> to restore subtitle settings to defaults (this does not currently remove the saved local consent/enablement record); or</li><li>uninstall the Extension to stop processing; Chrome normally removes extension-owned local and synced data according to Chrome’s uninstall and sync behavior.</li></ul>
+    <p>Because the developer does not operate an account system, relay server, analytics service, or user database for this Extension, the developer generally cannot identify or retrieve an individual user’s subtitle requests. Privacy questions or legally applicable requests may be sent to <a href="mailto:axing499@163.com">axing499@163.com</a>.</p>
 
     <h2>11. Changes to this policy</h2>
     <p>This policy may change when the Extension’s features, providers, data practices, or legal obligations change. Material changes should be reflected by updating the “Last updated” date, publishing the revised policy, and updating in-product/store disclosures where required. A future consent-version change and re-consent mechanism is tracked in <code>TODO.md</code>; the current implementation recognizes consent version 1.</p>
 
     <h2>12. Contact</h2>
-    <p>Privacy contact: <code>[PRIVACY_CONTACT_EMAIL — REQUIRED BEFORE STORE SUBMISSION]</code><br>
-    Support contact: <code>[SUPPORT_CONTACT_OR_URL — REQUIRED BEFORE STORE SUBMISSION]</code><br>
-    Public privacy-policy URL: <code>[PRIVACY_POLICY_PUBLIC_URL — REQUIRED BEFORE STORE SUBMISSION]</code></p>
+    <p>Privacy contact: <a href="mailto:axing499@163.com">axing499@163.com</a><br>
+    Public privacy-policy URL: <a href="https://axing499.github.io/HaoSubDoc/">https://axing499.github.io/HaoSubDoc/</a></p>
   </main>
 </body>
 </html>
