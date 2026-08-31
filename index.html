@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Privacy Policy — YT Dual Subtitle Translator</title>
+  <title>Privacy Policy — HaoSub Subtitle Translator</title>
   <style>
     :root { color-scheme: light dark; font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
     body { max-width: 860px; margin: 0 auto; padding: 32px 20px 56px; line-height: 1.65; color: CanvasText; background: Canvas; }
@@ -18,10 +18,10 @@
 </head>
 <body>
   <main>
-    <h1>Privacy Policy — YT Dual Subtitle Translator</h1>
-    <p class="meta"><strong>Effective date:</strong> August 15, 2026<br><strong>Last updated:</strong> August 19, 2026</p>
+    <h1>Privacy Policy — HaoSub Subtitle Translator</h1>
+    <p class="meta"><strong>Effective date:</strong> August 15, 2026<br><strong>Last updated:</strong> August 31, 2026</p>
 
-    <p>YT Dual Subtitle Translator (the <strong>“Extension”</strong>) adds machine-translated subtitles to YouTube videos. This policy explains what data the Extension handles, why it handles it, where it goes, how long it remains, and what choices you have.</p>
+    <p>HaoSub Subtitle Translator (the <strong>“Extension”</strong>) adds machine-translated subtitles to YouTube videos. This policy explains what data the Extension handles, why it handles it, where it goes, how long it remains, and what choices you have.</p>
     <p>The public version of this policy is available at <a href="https://axing499.github.io/HaoSubDoc/">https://axing499.github.io/HaoSubDoc/</a>.</p>
 
     <h2>1. Data the Extension handles</h2>
@@ -48,7 +48,7 @@
 
     <h2>3. Consent, defaults, and controls</h2>
     <p>Translation is <strong>off by default</strong>. The Extension does not begin translation merely because it is installed.</p>
-    <p>When no valid current-version local record exists, the Popup, Options page, and YouTube-player settings panel show a disclosure that subtitle text and the selected target language will be sent to Google Translate. Only <strong>Enable translation</strong> in that disclosure saves the record and enables translation. The ordinary <strong>Enable extension</strong> switch does not grant consent; it can enable translation only after a valid consent record already exists. Selecting <strong>Later</strong> saves <code>enabled: false</code> and does not create the record. Turning YouTube CC on is not consent and cannot create the record or enable translation. Original-only display does not send subtitle text to Google Translate.</p>
+    <p>When no valid current-version local record exists, the Popup, Options page, and YouTube-player settings panel show a disclosure that subtitle text and the selected target language will be sent to Google Translate. The <strong>Enable translation</strong> button inside that disclosure is the only explicit confirmation: clicking it saves the record and enables translation. Until that confirmation exists, the separate <strong>Enable translation</strong> switches outside the disclosure stay disabled and cannot grant consent or turn translation on. After a valid record already exists, the disclosure does not appear again and those switches only toggle translation on or off without rewriting consent. Selecting <strong>Later</strong> saves <code>enabled: false</code>, does not create the record, and suppresses automatic first-use prompts so they do not return on every video. Manually opening settings after <strong>Later</strong> still shows the disclosure and keeps the external switches locked until the in-disclosure button is used. Turning YouTube CC on is not consent and cannot create the record or enable translation. Original-only display does not send subtitle text to Google Translate.</p>
     <p>YouTube’s CC button controls caption activity for the current player session without changing the Extension’s saved translation preference. Turning CC off pauses Extension translation while preserving that preference. Turning CC on resumes Extension translation only when the saved preference is enabled and valid consent already exists; otherwise, only YouTube’s native captions are shown. CC actions never create consent or enable the saved translation preference. Turning CC or translation off never clears the local consent record.</p>
     <p>The Background Service Worker sends translation requests only when both:</p>
     <ol><li>a valid current-version local consent/enablement record exists; and</li><li>the translation setting remains enabled.</li></ol>
