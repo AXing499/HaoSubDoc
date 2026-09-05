@@ -19,7 +19,7 @@
 <body>
   <main>
     <h1>Privacy Policy — HaoSub Subtitle Translator</h1>
-    <p class="meta"><strong>Effective date:</strong> August 15, 2026<br><strong>Last updated:</strong> August 31, 2026</p>
+    <p class="meta"><strong>Effective date:</strong> August 15, 2026<br><strong>Last updated:</strong> September 4, 2026</p>
 
     <p>HaoSub Subtitle Translator (the <strong>“Extension”</strong>) adds machine-translated subtitles to YouTube videos. This policy explains what data the Extension handles, why it handles it, where it goes, how long it remains, and what choices you have.</p>
     <p>The public version of this policy is available at <a href="https://axing499.github.io/HaoSubDoc/">https://axing499.github.io/HaoSubDoc/</a>.</p>
@@ -42,7 +42,7 @@
       <li>YouTube caption metadata and responses are used in the browser to select, parse, time, and render the current subtitle track.</li>
       <li>Settings control translation and subtitle presentation.</li>
       <li>The consent/enablement record is used as a technical gate: the Background Service Worker rejects translation unless a valid current-version record exists and translation remains enabled.</li>
-      <li>Translated text is cached briefly in memory to avoid duplicate translation requests.</li>
+      <li>Translated text is cached in service-worker memory and in a current-tab, current-video session cache to avoid sending duplicate translation requests.</li>
     </ul>
     <p>The developer does not sell or rent user data. The Extension has no advertising, behavioral profiling, analytics, telemetry, or developer-operated model-training pipeline. Data handled by the Extension is not used by the developer for advertising, analytics, creditworthiness or lending decisions, or training developer models.</p>
 
@@ -64,17 +64,17 @@
     <p>Extension settings are saved in <code>chrome.storage.sync</code>. Chrome may synchronize these settings through the user’s signed-in Chrome profile according to the user’s Chrome sync configuration and Google’s applicable policies. Subtitle text and translated text are not written to <code>chrome.storage.sync</code> by the translation cache.</p>
     <h3>Local consent/enablement record</h3>
     <p>The consent/enablement version and enablement timestamp are saved in <code>chrome.storage.local</code>, local to the Chrome profile rather than intentionally synchronized by the Extension. A separate settings-schema version marker is also stored locally. These local records remain until extension-owned data is removed, such as through uninstall or browser/profile storage management. Resetting subtitle settings removes and recreates the settings-version marker but currently does not remove the consent/enablement record.</p>
-    <h3>In-memory translation cache</h3>
-    <p>The Background Service Worker maintains an in-memory least-recently-used translation cache containing the source text as part of the cache key and the translated text as its value. Its verified defaults are:</p>
-    <ul><li><strong>maximum size:</strong> 1,000 entries;</li><li><strong>time to live:</strong> 30 minutes per entry from insertion; and</li><li><strong>eviction:</strong> expired entries are removed when accessed, and least-recently-used entries are removed when capacity is exceeded.</li></ul>
-    <p>The cache is not persisted to Chrome storage. It disappears when the service worker’s memory is discarded, the Extension is reloaded, or the Extension is uninstalled; Chrome may discard that memory before the 30-minute TTL.</p>
+    <h3>Translation cache</h3>
+    <p>The Background Service Worker keeps a two-layer translation cache. The source text is part of the cache key and the translated text is the value. Neither layer writes subtitle text or translations to <code>chrome.storage.sync</code> or <code>chrome.storage.local</code>.</p>
+    <p><strong>Layer 1 (memory):</strong> an in-memory least-recently-used cache of at most 1,000 entries, each expiring 30 minutes after insertion. This layer disappears when the service worker’s memory is discarded, the Extension is reloaded, or the Extension is uninstalled.</p>
+    <p><strong>Session layer (current tab + video):</strong> always on. Entries live in <code>chrome.storage.session</code> for the current tab’s current YouTube watch video, at most 4,000 unique strings, with a 30-minute idle timeout. This layer is not written to disk. It is cleared when the tab is closed, when the user leaves <code>/watch</code> or switches videos, when the idle timeout elapses, when the browser session ends, or when the Extension is reloaded. It exists so refreshing the same video does not need a new translation request. If session storage is unavailable, translation continues using memory and the network.</p>
     <h3>Other transient processing</h3>
     <p>Current YouTube caption payloads and translation work may exist temporarily in page, content-script, or service-worker memory while a video is processed. The Extension does not provide a developer database or cloud account in which this data is retained.</p>
 
     <h2>6. Permissions and security</h2>
     <p>The Extension requests only:</p>
     <ul>
-      <li><code>storage</code> to save settings, the local consent/enablement record, and the settings-schema version marker;</li>
+      <li><code>storage</code> to save settings, the local consent/enablement record, the settings-schema version marker, and the current-tab current-video session translation cache in <code>chrome.storage.session</code>;</li>
       <li>host access to <code>https://www.youtube.com/*</code> to identify the current YouTube watch page and caption track, access valid YouTube timed-text responses, synchronize captions with playback, render translated subtitles, and add the extension’s settings entry to the YouTube player. The content script is matched on the YouTube host, but subtitle processing starts only for a watch page with a video ID; the Extension does not request broad access to other websites; and</li>
       <li>host access to <code>https://translate.googleapis.com/*</code> to send gated translation requests directly to Google Translate.</li>
     </ul>
@@ -95,7 +95,7 @@
     <p>Because the developer does not operate an account system, relay server, analytics service, or user database for this Extension, the developer generally cannot identify or retrieve an individual user’s subtitle requests. Privacy questions or legally applicable requests may be sent to <a href="mailto:axing499@163.com">axing499@163.com</a>.</p>
 
     <h2>11. Changes to this policy</h2>
-    <p>This policy may change when the Extension’s features, providers, data practices, or legal obligations change. Material changes should be reflected by updating the “Last updated” date, publishing the revised policy, and updating in-product/store disclosures where required. A future consent-version change and re-consent mechanism is tracked in <code>TODO.md</code>; the current implementation recognizes consent version 1.</p>
+    <p>This policy may change when the Extension’s features, providers, data practices, or legal obligations change. Material changes should be reflected by updating the “Last updated” date, publishing the revised policy, and updating in-product/store disclosures where required. The current implementation recognizes consent version 1. A future material privacy change should increment that version so the existing gate treats the old record as not granted.</p>
 
     <h2>12. Contact</h2>
     <p>Privacy contact: <a href="mailto:axing499@163.com">axing499@163.com</a><br>
